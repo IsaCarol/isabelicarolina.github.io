@@ -159,3 +159,55 @@ footer a {
         margin-bottom: 30px;
     }
 }
+
+/* --- LAYOUT DE DUAS COLUNAS PARA O HERO --- */
+
+.hero .hero-content {
+    display: flex; /* Habilita o layout flexível */
+    align-items: center; /* Alinha verticalmente os itens ao centro */
+    justify-content: space-between; /* Espaça as colunas */
+    min-height: 100vh;
+}
+
+.hero-text {
+    flex: 1; /* Ocupa a maior parte do espaço */
+    max-width: 550px; /* Limita a largura do texto para melhor leitura */
+    /* Garante que o texto fique mais para o topo/centro da área disponível, não grudado na esquerda */
+}
+
+.hero-image {
+    flex: 1; /* Ocupa a outra parte do espaço */
+    max-width: 350px; /* Limita a largura da imagem */
+    display: flex;
+    justify-content: flex-end; /* Alinha a imagem para a direita */
+}
+
+.profile-illustration {
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* Garante que a imagem não seja muito grande */
+    border-radius: 8px; /* Opcional: bordas arredondadas */
+}
+
+/* Ajustes de Responsividade para que as colunas virem linhas em telas pequenas */
+@media (max-width: 900px) {
+    .hero .hero-content {
+        flex-direction: column; /* Coloca as colunas em pilha (uma em cima da outra) */
+        text-align: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 40px; /* Adiciona espaço entre o texto e a imagem */
+    }
+
+    .hero h1 {
+        font-size: 3em;
+    }
+
+    .hero-image {
+        justify-content: center; /* Centraliza a imagem na tela pequena */
+    }
+}
