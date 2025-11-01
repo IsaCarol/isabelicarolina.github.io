@@ -6,7 +6,8 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    transition: background-color 0.5s, color 0.5s, fill 0.5s;
+    /* Transição suave para mudança de tema */
+    transition: background-color 0.5s, color 0.5s, fill 0.5s; 
 }
 
 :root {
@@ -19,7 +20,7 @@
     --cor-secundaria: #888;     
     --cor-linha: #222;          
     --cor-card: #1f2127; /* Fundo do Card no Dark Mode (um pouco mais claro) */
-    --wave-color: var(--cor-destaque); /* COR DA ONDA NO DARK MODE (Verde/Água) */
+    --wave-color: var(--cor-destaque); /* COR DA ONDA no Dark Mode (Verde/Água) */
 
     /* --- CORES DO TEMA LIGHT --- */
     --cor-fundo-light: #ffffff;
@@ -40,8 +41,7 @@ body.light-mode {
     --cor-secundaria: var(--cor-secundaria-light);
     --cor-linha: var(--cor-linha-light);
     --cor-card: var(--cor-card-light);
-    /* CORREÇÃO DA ONDA: No Light Mode, a onda continua Verde/Água para contraste */
-    --wave-color: var(--cor-destaque); 
+    --wave-color: var(--cor-destaque); /* Onda continua Verde/Água */
 }
 
 /* -------------------------------------- */
@@ -54,10 +54,19 @@ body {
     color: var(--cor-texto-principal);
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 .secao, footer {
     padding: 80px 0;
     background-color: var(--cor-fundo); 
     border-bottom: 1px solid var(--cor-linha);
+}
+.secao:last-child {
+    border-bottom: none;
 }
 
 .hero {
@@ -136,6 +145,7 @@ body.light-mode .nav-links a {
     line-height: 1.1;
     color: var(--cor-texto-principal); 
     text-align: left; 
+    /* Permite que o texto invada a área da onda */
     margin-right: -100px; 
 }
 
@@ -148,10 +158,10 @@ body.light-mode .nav-links a {
     margin-right: -100px; 
 }
 
-/* CORREÇÃO DO CONTRASSTE PARA O TEXTO SOBRE A ONDA */
+/* CONTRASTE DO TEXTO PARA O TEMA LIGHT (Preto sobre o Verde/Água da onda) */
 body.light-mode .hero-title,
 body.light-mode .hero-subtitle {
-    color: var(--cor-texto-principal); /* Preto para se destacar na onda */
+    color: var(--cor-texto-principal); 
 }
 
 /* -------------------------------------- */
@@ -160,12 +170,12 @@ body.light-mode .hero-subtitle {
 .wave-container {
     position: absolute;
     top: 0; 
-    right: 0; 
-    width: 50%; 
+    right: 0; /* Colado na direita */
+    width: 50%; /* Ocupa metade da tela */
     height: 100vh; 
     line-height: 0; 
     z-index: 1; 
-    transform: scaleX(-1); /* Inverte o SVG */
+    transform: scaleX(-1); /* Inverte o SVG para ele vir da direita para a esquerda */
     transform-origin: center;
 }
 
@@ -228,22 +238,8 @@ body.light-mode .hero-subtitle {
     text-decoration: underline;
 }
 
-/* Responsividade para a grade de projetos */
-@media (max-width: 992px) {
-    .grid-projetos {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
-    }
-}
-@media (max-width: 600px) {
-    .grid-projetos {
-        grid-template-columns: 1fr; /* 1 coluna em celulares */
-    }
-    .hero-title {
-        font-size: 2.5em;
-    }
-}
 /* -------------------------------------- */
-/* ESTILO DO BOTÃO DE TEMA - Mantido */
+/* ESTILO DO BOTÃO DE TEMA */
 /* -------------------------------------- */
 .theme-switcher {
     position: relative; 
@@ -260,4 +256,25 @@ body.light-mode .hero-subtitle {
     align-items: center;
     justify-content: center;
     z-index: 1001;
+}
+
+.theme-switcher:hover {
+    filter: brightness(0.9);
+}
+
+/* -------------------------------------- */
+/* RESPONSIVIDADE */
+/* -------------------------------------- */
+@media (max-width: 992px) {
+    .grid-projetos {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+}
+@media (max-width: 600px) {
+    .grid-projetos {
+        grid-template-columns: 1fr; /* 1 coluna em celulares */
+    }
+    .hero-title {
+        font-size: 2.5em;
+    }
 }
