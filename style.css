@@ -56,47 +56,55 @@ body {
 }
 
 /* -------------------------------------- */
-/* ESTILO LIGHT MODE (APLICADO VIA CLASSE BODY.light-mode) */
+/* NOVO: ESTILO DAS ONDAS SVG (Onda na cor de destaque) */
 /* -------------------------------------- */
-body.light-mode {
-    background-color: var(--cor-fundo-light);
-    color: var(--cor-texto-principal-light);
+.hero {
+    position: relative; 
+    overflow: hidden; 
+    padding-bottom: 120px; 
 }
 
-body.light-mode .secao {
-    background-color: var(--cor-fundo-light);
-    border-bottom: 1px solid var(--cor-linha-light);
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 0; 
 }
 
-body.light-mode .hero, 
-body.light-mode footer {
-    background-color: var(--cor-fundo-light); /* O Hero no Light Mode terá fundo claro */
+.wave {
+    display: block;
+    width: 100%;
+    height: 120px; 
 }
 
-body.light-mode h1,
-body.light-mode h3, 
-body.light-mode .lista-projetos h4 {
-    color: var(--cor-destaque); /* Títulos no Light Mode usam a cor de destaque */
+/* Cores da onda para cada tema */
+.wave path {
+    /* CORREÇÃO AQUI: A ONDA DEVE TER A COR DA PRÓXIMA SEÇÃO (Dark Mode, é a cor de fundo) */
+    fill: var(--cor-fundo); 
 }
 
-body.light-mode .hero p,
-body.light-mode .detalhes {
-    color: var(--cor-secundaria-light);
+body.light-mode .wave path {
+    /* No Light Mode, a onda deve ser branca */
+    fill: var(--cor-fundo-light); 
 }
 
-/* LINKS PADRÃO (LIGHT MODE) */
-body.light-mode .link-padrao,
-body.light-mode .lista-projetos a,
-body.light-mode footer a {
-    color: var(--cor-destaque);
-    border-bottom-color: var(--cor-destaque);
+
+/* CORREÇÃO IMPORTANTE: Mudar a cor do HERO no Light Mode para a cor de DESTAQUE (Verde/Água) */
+body.light-mode .hero {
+    background-color: var(--cor-destaque);
 }
 
-body.light-mode .link-padrao:hover {
-    color: var(--cor-texto-principal-light);
-    border-bottom-color: var(--cor-texto-principal-light);
+body.light-mode .hero .wave path {
+    /* A onda deve ter a cor do Light Mode (branco) */
+    fill: var(--cor-fundo-light);
 }
 
+/* A COR DE PREENCHIMENTO DO SVG ESTÁ NO HTML: Preste atenção no fill="var(--cor-fundo)" */
+/* Mas vamos garantir que o Hero tenha a cor que você quer (Dark Mode) */
+.hero {
+    background-color: var(--cor-fundo);
+}
 
 /* -------------------------------------- */
 /* NOVO: ESTILO DO BOTÃO DE TEMA */
