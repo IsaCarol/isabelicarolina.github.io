@@ -5,39 +5,35 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Faz o scroll ser suave */
     scroll-behavior: smooth;
 }
 
 :root {
-    /* --- CORES DO TEMA --- */
-    --cor-destaque: #01c99b;    /* Verde/Água Vibrante (Seu Destaque) */
-    --cor-fundo-escuro: #111217; /* Fundo Escuro para o Hero */
-    --cor-fundo-claro: #ffffff; /* Fundo Branco para as Seções */
-    --cor-texto-escuro: #333333; /* Texto Escuro/Preto */
-    --cor-texto-claro: #f0f0f0; /* Texto Claro/Branco */
-    --cor-secundaria: #888;     /* Cinza suave */
-    --cor-linha: #dddddd;       /* Linhas separadoras (para fundo claro) */
+    /* --- SUAS NOVAS CORES DE TEMA --- */
+    --cor-fundo: #111217;       /* Fundo Preto Quase Total */
+    --cor-texto-claro: #f0f0f0; /* Branco Sujo */
+    --cor-destaque: #01c99b;    /* Verde/Água Vibrante */
+    --cor-secundaria: #888;     /* Cinza suave para parágrafos */
+    --cor-linha: #222;          /* Linhas separadoras */
 }
 
-/* O BODY NÃO TERÁ COR, POIS CADA SEÇÃO DEFINE A SUA */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.7;
-    /* Remove a cor de fundo do body e deixa o controle para as seções */
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-claro);
 }
 
 /* UTILITÁRIOS */
 .container {
-    max-width: 900px;
+    max-width: 900px; /* Mais estreito para focar no conteúdo */
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Estilo Básico para todas as seções (Fundo Claro) */
 .secao {
     padding: 80px 0;
-    background-color: var(--cor-fundo-claro); /* Fundo Branco */
-    color: var(--cor-texto-escuro); /* Texto Preto */
     border-bottom: 1px solid var(--cor-linha);
 }
 
@@ -45,30 +41,14 @@ body {
     border-bottom: none;
 }
 
-/* TÍTULOS GERAIS DAS SEÇÕES (SOBRE, PROJETOS) */
-h3 {
-    font-size: 2.5em;
-    font-weight: 600;
-    margin-bottom: 40px;
-    text-align: left;
-    color: var(--cor-destaque); /* Título na cor de Destaque */
-}
-
-
-/* -------------------------------------- */
-/* 1. ESTILO ESPECÍFICO PARA A TELA INICIAL (HERO) */
-/* -------------------------------------- */
+/* CABEÇALHO/INTRODUÇÃO (HERO) */
 .hero {
     padding-top: 150px;
     padding-bottom: 80px;
-    min-height: 100vh;
+    min-height: 100vh; /* Ocupa a altura total da tela */
     display: flex;
-    align-items: center;
-    text-align: left;
-    
-    /* MUDANÇA: Fundo com a cor de Destaque */
-    background-color: var(--cor-destaque); 
-    color: var(--cor-texto-claro); /* Texto Branco */
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    text-align: left; /* Alinha o texto à esquerda, como no modelo */
 }
 
 .hero h1 {
@@ -76,31 +56,18 @@ h3 {
     font-weight: 700;
     margin-bottom: 15px;
     line-height: 1.1;
-    color: var(--cor-texto-claro); /* Letras Brancas no Hero */
+    /* Linha para garantir que o título tenha a cor de destaque se necessário, mas mantive o texto claro para maior impacto */
+    /* color: var(--cor-destaque); */ 
 }
 
 .hero p {
     font-size: 1.5em;
-    color: var(--cor-texto-claro); /* Texto Branco */
+    color: var(--cor-secundaria);
     margin-bottom: 30px;
     max-width: 600px;
 }
 
-/* Links no Hero (E-mail, Projetos, Sobre) */
-.hero .link-padrao {
-    color: var(--cor-texto-claro); /* Cor do link é branca */
-    border-bottom-color: var(--cor-texto-claro); /* Sublinhado branco */
-}
-
-.hero .link-padrao:hover {
-    color: var(--cor-fundo-escuro); /* Hover escuro */
-    border-bottom-color: var(--cor-fundo-escuro); 
-}
-
-
-/* -------------------------------------- */
-/* 2. ESTILO GERAL PARA LINKS EM SEÇÕES CLARAS */
-/* -------------------------------------- */
+/* LINKS DE NAVEGAÇÃO/BOTÕES (o estilo do link sublinhado) */
 .link-padrao {
     color: var(--cor-destaque);
     text-decoration: none;
@@ -111,8 +78,8 @@ h3 {
 }
 
 .link-padrao:hover {
-    color: var(--cor-texto-escuro);
-    border-bottom-color: var(--cor-texto-escuro);
+    color: var(--cor-texto-claro);
+    border-bottom-color: var(--cor-texto-claro);
 }
 
 /* SEÇÃO DE PROJETOS */
@@ -130,7 +97,6 @@ h3 {
     font-size: 2em;
     font-weight: 600;
     margin-bottom: 5px;
-    color: var(--cor-texto-escuro); /* Título do projeto em preto */
 }
 
 .lista-projetos .detalhes {
@@ -139,21 +105,26 @@ h3 {
 }
 
 .lista-projetos a {
-    display: inline-block;
+    display: inline-block; /* Mudado para inline-block para melhor controle */
     font-size: 0.9em;
     margin-top: 5px;
-    color: var(--cor-destaque); /* Link em Destaque */
+    color: var(--cor-destaque);
     text-decoration: none;
 }
 
+/* TÍTULOS DE SEÇÃO */
+h3 {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: left; /* Alinha o título da seção à esquerda */
+}
 
-/* FOOTER/CONTATO */
+/* SEÇÃO CONTATO/FOOTER */
 footer {
     padding: 40px 0;
     text-align: left;
     font-size: 1.2em;
-    background-color: var(--cor-fundo-claro); /* Mantém o footer claro ou defina uma cor */
-    color: var(--cor-texto-escuro);
 }
 
 footer a {
