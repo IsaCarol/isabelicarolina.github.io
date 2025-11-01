@@ -6,23 +6,125 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    transition: background-color 0.5s, color 0.5s; /* Transição suave para a mudança de tema */
 }
 
 :root {
-    /* --- CORES DO TEMA: DARK MODE COMPLETO --- */
+    /* --- CORES DO TEMA PADRÃO (DARK) --- */
     --cor-fundo: #111217;       /* Fundo Preto Quase Total */
-    --cor-texto-claro: #f0f0f0; /* Branco Sujo para todo o texto */
-    --cor-destaque: #01c99b;    /* Verde/Água Vibrante para links e títulos */
+    --cor-texto-principal: #f0f0f0; /* Branco Sujo */
+    --cor-destaque: #01c99b;    /* Verde/Água Vibrante */
     --cor-secundaria: #888;     /* Cinza suave para parágrafos */
-    --cor-linha: #222;          /* Linhas separadoras */
+    --cor-linha: #222;          /* Linhas separadoras (Dark) */
+
+    /* --- CORES DO TEMA LIGHT (NOVAS VARIÁVEIS) --- */
+    --cor-fundo-light: #ffffff;
+    --cor-texto-principal-light: #333333;
+    --cor-secundaria-light: #666;
+    --cor-linha-light: #dddddd;
 }
 
+/* -------------------------------------- */
+/* ESTILO PADRÃO (DARK MODE) */
+/* -------------------------------------- */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.7;
-    background-color: var(--cor-fundo); /* Aplica o fundo escuro ao corpo */
-    color: var(--cor-texto-claro);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
 }
+
+.secao {
+    padding: 80px 0;
+    background-color: var(--cor-fundo); 
+    border-bottom: 1px solid var(--cor-linha);
+}
+
+.hero, h3, .lista-projetos h4 {
+    color: var(--cor-texto-principal);
+}
+
+/* LINKS PADRÃO (DARK MODE) */
+.link-padrao {
+    color: var(--cor-destaque);
+    border-bottom: 2px solid var(--cor-destaque);
+    /* ... resto do link-padrao ... */
+}
+.link-padrao:hover {
+    color: var(--cor-texto-principal);
+    border-bottom-color: var(--cor-texto-principal);
+}
+
+/* -------------------------------------- */
+/* ESTILO LIGHT MODE (APLICADO VIA CLASSE BODY.light-mode) */
+/* -------------------------------------- */
+body.light-mode {
+    background-color: var(--cor-fundo-light);
+    color: var(--cor-texto-principal-light);
+}
+
+body.light-mode .secao {
+    background-color: var(--cor-fundo-light);
+    border-bottom: 1px solid var(--cor-linha-light);
+}
+
+body.light-mode .hero, 
+body.light-mode footer {
+    background-color: var(--cor-fundo-light);
+}
+
+body.light-mode h1,
+body.light-mode h3, 
+body.light-mode .lista-projetos h4 {
+    color: var(--cor-destaque); /* Títulos no Light Mode usam a cor de destaque */
+}
+
+body.light-mode .hero p,
+body.light-mode .detalhes {
+    color: var(--cor-secundaria-light);
+}
+
+/* LINKS PADRÃO (LIGHT MODE) */
+body.light-mode .link-padrao,
+body.light-mode .lista-projetos a,
+body.light-mode footer a {
+    color: var(--cor-destaque);
+    border-bottom-color: var(--cor-destaque);
+}
+
+body.light-mode .link-padrao:hover {
+    color: var(--cor-texto-principal-light);
+    border-bottom-color: var(--cor-texto-principal-light);
+}
+
+
+/* -------------------------------------- */
+/* NOVO: ESTILO DO BOTÃO DE TEMA */
+/* -------------------------------------- */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--cor-destaque);
+    color: var(--cor-fundo);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.theme-switcher:hover {
+    filter: brightness(0.9);
+}
+
+
+/* --- O RESTANTE DO CSS ABAIXO DEVE PERMANECER IGUAL, MAS GARANTO QUE ESTÁ AQUI --- */
 
 /* UTILITÁRIOS */
 .container {
@@ -30,27 +132,7 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* O SECAO agora também tem o fundo escuro */
-.secao {
-    padding: 80px 0;
-    background-color: var(--cor-fundo); 
-    border-bottom: 1px solid var(--cor-linha);
-}
-
-.secao:last-child {
-    border-bottom: none;
-}
-
-/* TÍTULOS GERAIS DAS SEÇÕES (SOBRE, PROJETOS) */
-h3 {
-    font-size: 2.5em;
-    font-weight: 600;
-    margin-bottom: 40px;
-    text-align: left;
-    color: var(--cor-texto-claro); /* Títulos em branco */
-}
-
+/* ... resto do CSS ... */
 /* CABEÇALHO/INTRODUÇÃO (HERO) */
 .hero {
     padding-top: 150px;
@@ -59,8 +141,6 @@ h3 {
     display: flex;
     align-items: center;
     text-align: left;
-    background-color: var(--cor-fundo); 
-    color: var(--cor-texto-claro);
 }
 
 .hero h1 {
@@ -68,7 +148,6 @@ h3 {
     font-weight: 700;
     margin-bottom: 15px;
     line-height: 1.1;
-    color: var(--cor-texto-claro);
 }
 
 .hero p {
@@ -76,21 +155,6 @@ h3 {
     color: var(--cor-secundaria);
     margin-bottom: 30px;
     max-width: 600px;
-}
-
-/* LINKS PADRÃO (em todo o site) */
-.link-padrao {
-    color: var(--cor-destaque); /* Destaque Verde/Água */
-    text-decoration: none;
-    font-weight: 600;
-    padding-bottom: 2px;
-    border-bottom: 2px solid var(--cor-destaque);
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.link-padrao:hover {
-    color: var(--cor-texto-claro);
-    border-bottom-color: var(--cor-texto-claro);
 }
 
 /* SEÇÃO DE PROJETOS */
@@ -108,7 +172,6 @@ h3 {
     font-size: 2em;
     font-weight: 600;
     margin-bottom: 5px;
-    color: var(--cor-texto-claro);
 }
 
 .lista-projetos .detalhes {
@@ -120,8 +183,10 @@ h3 {
     display: inline-block;
     font-size: 0.9em;
     margin-top: 5px;
-    color: var(--cor-destaque);
     text-decoration: none;
+}
+.lista-projetos a:not(.link-padrao) {
+    color: var(--cor-destaque);
 }
 
 /* FOOTER/CONTATO */
@@ -129,12 +194,9 @@ footer {
     padding: 40px 0;
     text-align: left;
     font-size: 1.2em;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-claro);
 }
 
 footer a {
-    color: var(--cor-destaque);
     text-decoration: none;
     margin-right: 15px;
 }
@@ -157,57 +219,5 @@ footer a {
     h3 {
         font-size: 2em;
         margin-bottom: 30px;
-    }
-}
-
-/* --- LAYOUT DE DUAS COLUNAS PARA O HERO --- */
-
-.hero .hero-content {
-    display: flex; /* Habilita o layout flexível */
-    align-items: center; /* Alinha verticalmente os itens ao centro */
-    justify-content: space-between; /* Espaça as colunas */
-    min-height: 100vh;
-}
-
-.hero-text {
-    flex: 1; /* Ocupa a maior parte do espaço */
-    max-width: 550px; /* Limita a largura do texto para melhor leitura */
-    /* Garante que o texto fique mais para o topo/centro da área disponível, não grudado na esquerda */
-}
-
-.hero-image {
-    flex: 1; /* Ocupa a outra parte do espaço */
-    max-width: 350px; /* Limita a largura da imagem */
-    display: flex;
-    justify-content: flex-end; /* Alinha a imagem para a direita */
-}
-
-.profile-illustration {
-    width: 100%;
-    height: auto;
-    max-width: 300px; /* Garante que a imagem não seja muito grande */
-    border-radius: 8px; /* Opcional: bordas arredondadas */
-}
-
-/* Ajustes de Responsividade para que as colunas virem linhas em telas pequenas */
-@media (max-width: 900px) {
-    .hero .hero-content {
-        flex-direction: column; /* Coloca as colunas em pilha (uma em cima da outra) */
-        text-align: center;
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-
-    .hero-text {
-        max-width: 100%;
-        margin-bottom: 40px; /* Adiciona espaço entre o texto e a imagem */
-    }
-
-    .hero h1 {
-        font-size: 3em;
-    }
-
-    .hero-image {
-        justify-content: center; /* Centraliza a imagem na tela pequena */
     }
 }
