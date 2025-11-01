@@ -10,12 +10,12 @@
 }
 
 :root {
-    /* Cores do Dark Mode */
-    --cor-fundo: #0c0c0c;       /* Preto muito escuro */
+    /* --- SUAS NOVAS CORES --- */
+    --cor-fundo: #111217;       /* Fundo Preto Quase Total (como solicitado) */
     --cor-texto-claro: #f0f0f0; /* Branco sujo */
-    --cor-destaque: #007bff;    /* Azul para links/destaques - você pode trocar por um verde-limão ou outra cor vibrante */
+    --cor-destaque: #01c99b;    /* Verde/Água Vibrante (como solicitado) */
     --cor-secundaria: #888;     /* Cinza suave para parágrafos */
-    --cor-linha: #222;          /* Linhas separadoras */
+    --cor-linha: #222;          /* Linhas separadoras (mantive, fica bom no fundo escuro) */
 }
 
 body {
@@ -25,7 +25,6 @@ body {
     color: var(--cor-texto-claro);
 }
 
-/* UTILITÁRIOS */
 .container {
     max-width: 900px; /* Mais estreito para focar no conteúdo, como o dele */
     margin: 0 auto;
