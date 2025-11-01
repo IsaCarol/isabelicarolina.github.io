@@ -12,7 +12,7 @@
 :root {
     /* --- CORES DO TEMA PADRÃO (DARK) --- */
     --cor-fundo: #111217;       
-    --cor-texto-principal: #f0f0f0; 
+    --cor-texto-principal: #f0f0f0; /* Branco */
     --cor-destaque: #01c99b;    /* Verde/Água Vibrante */
     --cor-secundaria: #888;     
     --cor-linha: #222;          
@@ -31,16 +31,13 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.7;
     background-color: var(--cor-fundo);
-    color: var(--cor-destaque);
+    color: var(--cor-texto-principal);
 }
 
 .secao, footer {
     padding: 80px 0;
     background-color: var(--cor-fundo); 
     border-bottom: 1px solid var(--cor-linha);
-}
-.secao:last-child {
-    border-bottom: none;
 }
 
 .hero {
@@ -53,11 +50,11 @@ body {
 }
 
 /* -------------------------------------- */
-/* NAVEGAÇÃO (NAVBAR) */
+/* NAVEGAÇÃO (NAVBAR) - Mantida */
 /* -------------------------------------- */
 .navbar {
     display: flex;
-    justify-content: flex-end; /* ALINHA TUDO À DIREITA (Links e Botão) */
+    justify-content: flex-end; 
     align-items: center;
     padding: 20px 0;
     position: sticky;
@@ -68,52 +65,49 @@ body {
     background-color: var(--cor-fundo);
     border-bottom: 1px solid var(--cor-linha);
 }
-
+/* ... nav-links e links a ... */
 .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-    /* CORREÇÃO: Espaço entre links e o botão */
     margin-right: 20px; 
 }
-
 .nav-links li {
     margin-left: 30px;
 }
-
 .nav-links a {
     color: var(--cor-texto-principal);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
 }
-
 .nav-links a:hover {
     color: var(--cor-destaque);
 }
 
+
 /* -------------------------------------- */
-/* CONTEÚDO PRINCIPAL DO HERO (TÍTULO E SUBTÍTULO) */
+/* CONTEÚDO PRINCIPAL DO HERO */
 /* -------------------------------------- */
 .hero-content {
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente o bloco de texto */
+    justify-content: center; /* Centraliza verticalmente */
     align-items: flex-start; 
     padding-top: 50px; 
     padding-bottom: 50px; 
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Fica acima da onda */
 }
 
-/* NOVO: Estilo para o seu nome */
+/* CORREÇÃO: Cores do texto no DARK MODE (DEVE SER BRANCO) */
 .hero-name {
-    font-size: 2.5em; /* Nome maior */
+    font-size: 2.5em; 
     font-weight: 600;
     margin-bottom: 5px;
-    color: var(--cor-destaque); /* Usa a cor de destaque (Verde/Água) */
+    color: var(--cor-texto-principal); /* BRANCO no Dark Mode */
 }
 
 .hero-title {
@@ -121,7 +115,7 @@ body {
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.1;
-    color: var(--cor-texto-principal); 
+    color: var(--cor-texto-principal); /* BRANCO no Dark Mode */
     text-align: left; 
 }
 
@@ -134,54 +128,65 @@ body {
 }
 
 /* -------------------------------------- */
-/* ESTILO LIGHT MODE (e suas transições) */
+/* ESTILO LIGHT MODE (TEXTO E FUNDO) */
 /* -------------------------------------- */
+body.light-mode {
+    background-color: var(--cor-fundo-light);
+    color: var(--cor-texto-principal-light);
+}
 
-/* ... (O restante das regras light-mode permanecem as mesmas para o layout) ... */
-
+/* Navbar no Light Mode */
+body.light-mode .navbar {
+    background-color: var(--cor-fundo-light);
+    border-bottom: 1px solid var(--cor-linha-light);
+}
 body.light-mode .nav-links a {
-    color: var(--cor-texto-principal-light); /* Texto preto na navbar Light Mode */
+    color: var(--cor-texto-principal-light); /* Links PRETOS no Light Mode */
 }
 
-body.light-mode .hero-name {
-    color: var(--cor-texto-principal-light); /* Nome preto no Light Mode para contraste */
-}
-
+/* CORREÇÃO: Cores do texto no LIGHT MODE (DEVE SER PRETO sobre a onda verde/água) */
+body.light-mode .hero-name,
 body.light-mode .hero-title {
-    color: var(--cor-destaque); /* Título na cor de destaque no Light Mode */
+    color: var(--cor-texto-principal-light); /* PRETO no Light Mode */
 }
 
 /* -------------------------------------- */
-/* ESTILO DAS ONDAS SVG (Onda Verde/Água no Light Mode) */
+/* ESTILO DAS ONDAS SVG (PAREDE LATERAL) */
 /* -------------------------------------- */
 .wave-container {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0; /* Começa do topo */
+    right: 0; /* Colado na direita */
     width: 100%;
+    height: 100vh; /* Altura total da viewport */
     line-height: 0; 
     z-index: 1; 
+    transform: scaleX(-1); /* Inverte o SVG para ele vir da direita para a esquerda */
+    transform-origin: center;
 }
 
 .wave {
     display: block;
     width: 100%;
-    height: 100vh; /* Para garantir que ocupa a lateral */
+    height: 100%; /* Ocupa 100% da altura do container */
 }
 
+/* CORREÇÃO CRUCIAL: A onda deve ser a cor de DESTAQUE (verde/água) no Light Mode */
 .wave path {
-    fill: var(--cor-fundo); /* Dark Mode: Onda preta */
+    /* Dark Mode: A onda é a cor de fundo (para criar uma parede lateral invisível) */
+    fill: var(--cor-fundo); 
+    transform: scaleX(-1); /* Desinverte o path para as curvas ficarem corretas */
 }
 
 body.light-mode .wave path {
-    fill: var(--cor-destaque); /* Light Mode: Onda Verde/Água */
+    /* Light Mode: A onda deve ter a cor VERDE/ÁGUA (destaque) */
+    fill: var(--cor-destaque); 
 }
 
 /* -------------------------------------- */
 /* ESTILO DO BOTÃO DE TEMA */
 /* -------------------------------------- */
 .theme-switcher {
-    /* CORREÇÃO: Posiciona o botão à direita, fora da navbar, se necessário */
     position: relative; 
     background: var(--cor-destaque);
     color: var(--cor-fundo); 
@@ -202,5 +207,4 @@ body.light-mode .wave path {
     filter: brightness(0.9);
 }
 
-/* O restante do CSS (container, lista-projetos, media queries) deve ser mantido... */
-/* ... conforme o último código enviado. */
+/* ... (O restante dos estilos, como links e media queries, deve ser mantido) ... */
