@@ -18,13 +18,15 @@
     --cor-texto-principal: #f0f0f0; /* Branco */
     --cor-secundaria: #888;     
     --cor-linha: #222;          
-    --wave-color: var(--cor-destaque); /* COR DA ONDA NO DARK MODE (PARA CONTRASTE) */
+    --cor-card: #1f2127; /* Fundo do Card no Dark Mode (um pouco mais claro) */
+    --wave-color: var(--cor-destaque); /* COR DA ONDA NO DARK MODE (Verde/Água) */
 
     /* --- CORES DO TEMA LIGHT --- */
     --cor-fundo-light: #ffffff;
     --cor-texto-principal-light: #333333; /* Preto */
     --cor-secundaria-light: #666;
     --cor-linha-light: #dddddd;
+    --cor-card-light: #f5f5f5;
 }
 
 /* TEMA LIGHT: SOBRESCREVE VARIÁVEIS CHAVE */
@@ -32,12 +34,14 @@ body.light-mode {
     background-color: var(--cor-fundo-light);
     color: var(--cor-texto-principal-light);
     
-    /* CORREÇÃO CRUCIAL: No Light Mode, a onda deve ser a cor de DESTAQUE,
-       e o fundo principal (onde está o texto) deve ser BRANCO (fundo-light) */
-    --wave-color: var(--cor-destaque); 
+    /* VARIÁVEIS SOBREESCRITAS para o Light Mode */
     --cor-fundo: var(--cor-fundo-light);
     --cor-texto-principal: var(--cor-texto-principal-light);
+    --cor-secundaria: var(--cor-secundaria-light);
     --cor-linha: var(--cor-linha-light);
+    --cor-card: var(--cor-card-light);
+    /* CORREÇÃO DA ONDA: No Light Mode, a onda continua Verde/Água para contraste */
+    --wave-color: var(--cor-destaque); 
 }
 
 /* -------------------------------------- */
@@ -106,8 +110,12 @@ body {
     font-weight: 500;
 }
 
+body.light-mode .nav-links a {
+    color: var(--cor-texto-principal); /* links pretos no light mode */
+}
+
 /* -------------------------------------- */
-/* CONTEÚDO PRINCIPAL DO HERO (TÍTULO E SUBTÍTULO) */
+/* CONTEÚDO PRINCIPAL DO HERO */
 /* -------------------------------------- */
 .hero-content {
     flex-grow: 1; 
@@ -122,13 +130,12 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5em; /* Título grande */
+    font-size: 3.5em; 
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.1;
     color: var(--cor-texto-principal); 
     text-align: left; 
-    /* Margem para 'invadir' a onda na direita */
     margin-right: -100px; 
 }
 
@@ -141,6 +148,11 @@ body {
     margin-right: -100px; 
 }
 
+/* CORREÇÃO DO CONTRASSTE PARA O TEXTO SOBRE A ONDA */
+body.light-mode .hero-title,
+body.light-mode .hero-subtitle {
+    color: var(--cor-texto-principal); /* Preto para se destacar na onda */
+}
 
 /* -------------------------------------- */
 /* ESTILO DAS ONDAS SVG (PAREDE LATERAL) */
@@ -148,12 +160,12 @@ body {
 .wave-container {
     position: absolute;
     top: 0; 
-    right: 0; /* Colado na direita */
-    width: 50%; /* Ocupa metade da tela */
+    right: 0; 
+    width: 50%; 
     height: 100vh; 
     line-height: 0; 
     z-index: 1; 
-    transform: scaleX(-1); /* Inverte o SVG para ele vir da direita para a esquerda */
+    transform: scaleX(-1); /* Inverte o SVG */
     transform-origin: center;
 }
 
@@ -163,14 +175,75 @@ body {
     height: 100%; 
 }
 
-/* CORREÇÃO: A onda sempre usa a cor da variável --wave-color */
 .wave path {
-    fill: var(--wave-color); 
+    fill: var(--wave-color); /* Usa a variável que é Verde/Água nos dois temas */
     transform: scaleX(-1); /* Desinverte o path para as curvas ficarem corretas */
 }
 
 /* -------------------------------------- */
-/* ESTILO DO BOTÃO DE TEMA */
+/* ESTILO DA SEÇÃO DE PROJETOS (CASES) */
+/* -------------------------------------- */
+.freelas-feitos {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--cor-destaque);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.grid-projetos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card-projeto {
+    background-color: var(--cor-card); /* Cor do card, muda com o tema */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-projeto h4 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin-bottom: 10px;
+}
+
+.card-projeto p {
+    font-size: 1em;
+    color: var(--cor-secundaria);
+    margin-bottom: 20px;
+    min-height: 70px; /* Garante altura uniforme */
+}
+
+.card-projeto a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    font-weight: 600;
+}
+.card-projeto a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade para a grade de projetos */
+@media (max-width: 992px) {
+    .grid-projetos {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+}
+@media (max-width: 600px) {
+    .grid-projetos {
+        grid-template-columns: 1fr; /* 1 coluna em celulares */
+    }
+    .hero-title {
+        font-size: 2.5em;
+    }
+}
+/* -------------------------------------- */
+/* ESTILO DO BOTÃO DE TEMA - Mantido */
 /* -------------------------------------- */
 .theme-switcher {
     position: relative; 
@@ -188,5 +261,3 @@ body {
     justify-content: center;
     z-index: 1001;
 }
-
-/* [Outros estilos (links, footer, projetos) - Devem ser mantidos] */
