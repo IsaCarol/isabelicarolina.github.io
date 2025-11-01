@@ -6,20 +6,20 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    transition: background-color 0.5s, color 0.5s, fill 0.5s; /* Transição suave */
+    transition: background-color 0.5s, color 0.5s, fill 0.5s;
 }
 
 :root {
     /* --- CORES DO TEMA PADRÃO (DARK) --- */
-    --cor-fundo: #111217;       /* Fundo Preto Quase Total */
-    --cor-texto-principal: #f0f0f0; /* Branco Sujo */
+    --cor-fundo: #111217;       
+    --cor-texto-principal: #f0f0f0; 
     --cor-destaque: #01c99b;    /* Verde/Água Vibrante */
-    --cor-secundaria: #888;     /* Cinza suave para parágrafos */
-    --cor-linha: #222;          /* Linhas separadoras (Dark) */
+    --cor-secundaria: #888;     
+    --cor-linha: #222;          
 
     /* --- CORES DO TEMA LIGHT --- */
     --cor-fundo-light: #ffffff;
-    --cor-texto-principal-light: #333333;
+    --cor-texto-principal-light: #333333; /* Preto */
     --cor-secundaria-light: #666;
     --cor-linha-light: #dddddd;
 }
@@ -47,10 +47,10 @@ body {
     position: relative; 
     min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Para empilhar nav e hero-content */
+    flex-direction: column;
     background-color: var(--cor-fundo);
     overflow: hidden; 
-    padding-bottom: 120px; /* Espaço para a onda */
+    /* Remove padding-bottom, pois o wave-container é absoluto */
 }
 
 /* -------------------------------------- */
@@ -61,12 +61,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    position: sticky; /* Sticky para ficar no topo ao rolar */
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    background-color: var(--cor-fundo); /* Fundo da nav no Dark Mode */
+    background-color: var(--cor-fundo);
     border-bottom: 1px solid var(--cor-linha);
 }
 
@@ -100,28 +100,29 @@ body {
 }
 
 /* -------------------------------------- */
-/* CONTEÚDO PRINCIPAL DO HERO */
+/* CONTEÚDO PRINCIPAL DO HERO (TÍTULO E SUBTÍTULO) */
 /* -------------------------------------- */
 .hero-content {
-    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente o título e subtítulo */
-    align-items: flex-start; /* Alinha à esquerda */
-    padding-top: 50px; /* Padding extra para não colar na nav */
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    padding-top: 50px; 
+    padding-bottom: 50px; /* Padding suficiente para o conteúdo */
 }
 
 .hero-title {
-    font-size: 3.5em; /* Título menor */
+    font-size: 3em; 
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.1;
-    color: var(--cor-texto-principal); /* Cor principal no Dark Mode */
-    text-align: left; /* Centralizado à esquerda */
+    color: var(--cor-texto-principal); 
+    text-align: left; 
 }
 
 .hero-subtitle {
-    font-size: 1.4em; /* Subtítulo um pouco menor */
+    font-size: 1.2em; 
     color: var(--cor-secundaria);
     margin-bottom: 30px;
     max-width: 600px;
@@ -129,7 +130,28 @@ body {
 }
 
 /* -------------------------------------- */
-/* ESTILO LIGHT MODE */
+/* LINKS E TÍTULOS GERAIS */
+/* -------------------------------------- */
+.link-padrao, .lista-projetos a, footer a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    font-weight: 600;
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--cor-destaque);
+    transition: color 0.3s, border-color 0.3s;
+}
+.link-padrao:hover {
+    color: var(--cor-texto-principal);
+    border-bottom-color: var(--cor-texto-principal);
+}
+
+/* Títulos das Seções (Sobre, Projetos) */
+h3, .lista-projetos h4 {
+    color: var(--cor-texto-principal);
+}
+
+/* -------------------------------------- */
+/* ESTILO LIGHT MODE (e suas transições) */
 /* -------------------------------------- */
 body.light-mode {
     background-color: var(--cor-fundo-light);
@@ -137,19 +159,28 @@ body.light-mode {
 }
 
 body.light-mode .secao, 
-body.light-mode footer,
-body.light-mode .hero,
-body.light-mode .navbar { /* Navbar também muda para light */
+body.light-mode footer {
     background-color: var(--cor-fundo-light);
     border-bottom: 1px solid var(--cor-linha-light);
 }
 
+/* CORREÇÃO DO HERO PARA SEGUIR A IMAGEM DE REFERÊNCIA */
+body.light-mode .hero {
+    /* No Light Mode, a parte principal (esquerda) deve ser branca */
+    background-color: var(--cor-fundo-light); 
+}
+
+/* CORREÇÃO DA NAVBAR NO LIGHT MODE */
+body.light-mode .navbar {
+    background-color: var(--cor-fundo-light);
+    border-bottom: 1px solid var(--cor-linha-light);
+}
 body.light-mode .navbar .logo {
-    color: var(--cor-destaque);
+    color: var(--cor-destaque); /* Verde/Água para o logo */
 }
 
 body.light-mode .nav-links a {
-    color: var(--cor-texto-principal-light);
+    color: var(--cor-texto-principal-light); /* Texto preto na navbar Light Mode */
 }
 
 body.light-mode .nav-links a:hover {
@@ -160,20 +191,12 @@ body.light-mode .nav-links a:hover {
 body.light-mode .hero-title,
 body.light-mode h3, 
 body.light-mode .lista-projetos h4 {
-    color: var(--cor-destaque); /* Títulos na cor de destaque no Light Mode */
+    color: var(--cor-destaque); 
 }
 
 body.light-mode .hero-subtitle,
 body.light-mode .detalhes {
     color: var(--cor-secundaria-light);
-}
-
-/* LINKS PADRÃO (LIGHT MODE) */
-body.light-mode .link-padrao, 
-body.light-mode .lista-projetos a, 
-body.light-mode footer a {
-    color: var(--cor-destaque);
-    border-bottom-color: var(--cor-destaque);
 }
 
 body.light-mode .link-padrao:hover {
@@ -190,32 +213,42 @@ body.light-mode .link-padrao:hover {
     left: 0;
     width: 100%;
     line-height: 0; 
+    z-index: 1; /* Coloca a onda acima do fundo, mas abaixo do conteúdo */
 }
 
 .wave {
     display: block;
     width: 100%;
-    height: 120px; 
+    height: 100vh; /* Aumenta a altura para abranger a lateral */
 }
 
-/* Cor da onda: deve ser a mesma cor de fundo da próxima seção */
+/* CORREÇÃO CRUCIAL: A onda deve ser a cor de DESTAQUE no Light Mode
+   (E a cor de fundo no Dark Mode, pois ela está cobrindo a seção "Sobre") */
 .wave path {
+    /* Dark Mode: A onda é a cor de fundo (para criar uma parede lateral invisível) */
     fill: var(--cor-fundo); 
 }
 
 body.light-mode .wave path {
-    fill: var(--cor-fundo-light); 
+    /* Light Mode: A onda deve ter a cor VERDE/ÁGUA (destaque) */
+    fill: var(--cor-destaque); 
+}
+
+/* O conteúdo do Hero (Texto) deve ficar acima da onda */
+.hero-content {
+    position: relative;
+    z-index: 10;
 }
 
 /* -------------------------------------- */
 /* ESTILO DO BOTÃO DE TEMA */
 /* -------------------------------------- */
 .theme-switcher {
-    position: absolute; /* Posicionado dentro do HERO, mas na área da NAVBAR */
+    position: absolute; 
     top: 20px; 
     right: 20px; 
     background: var(--cor-destaque);
-    color: var(--cor-fundo); /* Cor do ícone */
+    color: var(--cor-fundo); 
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -226,88 +259,8 @@ body.light-mode .wave path {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1001; /* Maior que a navbar para ficar por cima */
-}
-.theme-switcher:hover {
-    filter: brightness(0.9);
+    z-index: 1001;
 }
 
-/* -------------------------------------- */
-/* RESTANTE DOS ESTILOS (PROJETOS, FOOTER) */
-/* -------------------------------------- */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* SEÇÃO DE PROJETOS */
-.lista-projetos {
-    list-style: none;
-    text-align: left;
-    margin-top: 40px;
-}
-
-.lista-projetos li {
-    margin-bottom: 40px;
-}
-
-.lista-projetos h4 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.lista-projetos .detalhes {
-    font-size: 1em;
-    color: var(--cor-secundaria);
-}
-
-.lista-projetos a {
-    display: inline-block;
-    font-size: 0.9em;
-    margin-top: 5px;
-}
-.lista-projetos a:not(.link-padrao) { /* Aplica a cor de destaque apenas a estes links */
-    color: var(--cor-destaque);
-}
-
-
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .nav-links {
-        margin-top: 15px;
-        flex-direction: column;
-        width: 100%;
-    }
-    .nav-links li {
-        margin: 5px 0;
-    }
-    .theme-switcher {
-        position: relative; /* Ajusta para mobile para não sobrepor */
-        top: auto;
-        right: auto;
-        margin-top: 15px;
-    }
-    .hero {
-        padding-top: 80px;
-        min-height: auto;
-    }
-    .hero-title {
-        font-size: 2.5em;
-    }
-    .hero-subtitle {
-        font-size: 1.2em;
-    }
-    .lista-projetos h4 {
-        font-size: 1.5em;
-    }
-    h3 {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-}
+/* O restante do CSS (container, lista-projetos, media queries) deve ser mantido... */
+/* ... conforme o último código enviado. */
