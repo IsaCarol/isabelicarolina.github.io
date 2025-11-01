@@ -70,7 +70,7 @@ body.light-mode .secao {
 
 body.light-mode .hero, 
 body.light-mode footer {
-    background-color: var(--cor-fundo-light);
+    background-color: var(--cor-fundo-light); /* O Hero no Light Mode terá fundo claro */
 }
 
 body.light-mode h1,
@@ -123,6 +123,38 @@ body.light-mode .link-padrao:hover {
     filter: brightness(0.9);
 }
 
+/* -------------------------------------- */
+/* NOVO: ESTILO DAS ONDAS SVG */
+/* -------------------------------------- */
+.hero {
+    position: relative; /* Para que a onda seja posicionada em relação ao Hero */
+    overflow: hidden; /* Garante que a onda não transborde */
+    padding-bottom: 120px; /* Ajusta o padding para a onda ficar na parte de baixo */
+}
+
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 0; /* Remove espaço extra abaixo do SVG */
+}
+
+.wave {
+    display: block;
+    width: 100%;
+    height: 120px; /* Altura da onda */
+}
+
+/* Cores da onda para cada tema */
+.wave path {
+    fill: var(--cor-fundo); /* Cor de fundo padrão (Dark) */
+}
+
+body.light-mode .wave path {
+    fill: var(--cor-fundo-light); /* Cor de fundo Light Mode */
+}
+
 
 /* --- O RESTANTE DO CSS ABAIXO DEVE PERMANECER IGUAL, MAS GARANTO QUE ESTÁ AQUI --- */
 
@@ -133,15 +165,6 @@ body.light-mode .link-padrao:hover {
     padding: 0 20px;
 }
 /* ... resto do CSS ... */
-/* CABEÇALHO/INTRODUÇÃO (HERO) */
-.hero {
-    padding-top: 150px;
-    padding-bottom: 80px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    text-align: left;
-}
 
 .hero h1 {
     font-size: 4em;
