@@ -1,136 +1,30 @@
-/* RESET BÁSICO E VARIÁVEIS */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+document.addEventListener('DOMContentLoaded', () => {
+    const switcher = document.getElementById('theme-switcher');
+    const body = document.body;
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Faz o scroll ser suave, como no Iuricode */
-    scroll-behavior: smooth;
-}
+    // 1. Verificar a preferência do usuário (salva no localStorage)
+    const currentTheme = localStorage.getItem('theme');
 
-:root {
-    /* --- SUAS NOVAS CORES --- */
-    --cor-fundo: #111217;       /* Fundo Preto Quase Total (como solicitado) */
-    --cor-texto-claro: #f0f0f0; /* Branco sujo */
-    --cor-destaque: #01c99b;    /* Verde/Água Vibrante (como solicitado) */
-    --cor-secundaria: #888;     /* Cinza suave para parágrafos */
-    --cor-linha: #222;          /* Linhas separadoras (mantive, fica bom no fundo escuro) */
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.7;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-claro);
-}
-
-.container {
-    max-width: 900px; /* Mais estreito para focar no conteúdo, como o dele */
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.secao {
-    padding: 80px 0;
-    border-bottom: 1px solid var(--cor-linha);
-}
-
-.secao:last-child {
-    border-bottom: none;
-}
-
-/* CABEÇALHO/INTRODUÇÃO (O "HERO" vira a primeira seção) */
-.hero {
-    padding-top: 150px;
-    padding-bottom: 80px;
-    min-height: 100vh; /* Ocupa a altura total da tela */
-    display: flex;
-    align-items: center; /* Centraliza verticalmente o conteúdo */
-}
-
-.hero h1 {
-    font-size: 4em;
-    font-weight: 700;
-    margin-bottom: 15px;
-    line-height: 1.1;
-}
-
-.hero p {
-    font-size: 1.5em;
-    color: var(--cor-secundaria);
-    margin-bottom: 30px;
-    max-width: 600px;
-}
-
-/* BOTÕES / LINKS */
-.link-padrao {
-    color: var(--cor-destaque);
-    text-decoration: none;
-    font-weight: 600;
-    padding-bottom: 2px;
-    border-bottom: 2px solid var(--cor-destaque);
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.link-padrao:hover {
-    color: var(--cor-texto-claro);
-    border-bottom-color: var(--cor-texto-claro);
-}
-
-/* SEÇÃO DE PROJETOS */
-.lista-projetos {
-    list-style: none;
-    text-align: left;
-}
-
-.lista-projetos li {
-    margin-bottom: 40px;
-}
-
-.lista-projetos h4 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.lista-projetos .detalhes {
-    font-size: 1em;
-    color: var(--cor-secundaria);
-}
-
-.lista-projetos a {
-    display: block;
-    font-size: 0.9em;
-    margin-top: 5px;
-    color: var(--cor-destaque);
-}
-
-/* SEÇÃO CONTATO/FOOTER */
-footer {
-    padding: 40px 0;
-    text-align: left;
-    font-size: 1.2em;
-}
-
-footer a {
-    color: var(--cor-destaque);
-    text-decoration: none;
-    margin-right: 15px;
-}
-
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 80px;
+    if (currentTheme === 'light') {
+        body.classList.add('light-mode');
+        switcher.innerHTML = '🌙'; // Altera o ícone para Lua (Dark Mode)
+    } else {
+        // Padrão é Dark Mode
+        switcher.innerHTML = '☀️'; // Altera o ícone para Sol (Light Mode)
     }
-    .hero h1 {
-        font-size: 2.5em;
-    }
-    .hero p {
-        font-size: 1.2em;
-    }
-    .lista-projetos h4 {
-        font-size: 1.5em;
-    }
-}
+
+    // 2. Adicionar o evento de clique ao botão
+    switcher.addEventListener('click', () => {
+        // Alternar a classe light-mode no body
+        body.classList.toggle('light-mode');
+
+        // 3. Salvar e atualizar o ícone
+        if (body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+            switcher.innerHTML = '🌙'; // Modo Light ativo, mostrar ícone da Lua
+        } else {
+            localStorage.setItem('theme', 'dark');
+            switcher.innerHTML = '☀️'; // Modo Dark ativo, mostrar ícone do Sol
+        }
+    });
+});
