@@ -31,7 +31,7 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.7;
     background-color: var(--cor-fundo);
-    color: var(--cor-texto-principal);
+    color: var(--cor-destaque);
 }
 
 .secao, footer {
