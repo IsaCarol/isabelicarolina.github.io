@@ -6,7 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    transition: background-color 0.5s, color 0.5s; /* Transição suave para a mudança de tema */
+    transition: background-color 0.5s, color 0.5s, fill 0.5s; /* Transição suave para a mudança de tema */
 }
 
 :root {
@@ -17,7 +17,7 @@
     --cor-secundaria: #888;     /* Cinza suave para parágrafos */
     --cor-linha: #222;          /* Linhas separadoras (Dark) */
 
-    /* --- CORES DO TEMA LIGHT (NOVAS VARIÁVEIS) --- */
+    /* --- CORES DO TEMA LIGHT --- */
     --cor-fundo-light: #ffffff;
     --cor-texto-principal-light: #333333;
     --cor-secundaria-light: #666;
@@ -34,35 +34,85 @@ body {
     color: var(--cor-texto-principal);
 }
 
-.secao {
+.secao, footer {
     padding: 80px 0;
     background-color: var(--cor-fundo); 
     border-bottom: 1px solid var(--cor-linha);
 }
+.secao:last-child {
+    border-bottom: none;
+}
 
-.hero, h3, .lista-projetos h4 {
+.hero {
+    position: relative; /* FUNDAMENTAL para posicionar o botão e a onda */
+    padding-top: 150px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    justify-content: flex-start;
+    text-align: left;
+    background-color: var(--cor-fundo);
+    overflow: hidden; 
+    padding-bottom: 120px; /* Espaço para a onda */
+}
+
+/* Títulos e Textos no Dark Mode */
+.hero h1, h3, .lista-projetos h4 {
     color: var(--cor-texto-principal);
 }
 
 /* LINKS PADRÃO (DARK MODE) */
-.link-padrao {
+.link-padrao, .lista-projetos a, footer a {
     color: var(--cor-destaque);
+    text-decoration: none;
+    font-weight: 600;
+    padding-bottom: 2px;
     border-bottom: 2px solid var(--cor-destaque);
-    /* ... resto do link-padrao ... */
+    transition: color 0.3s, border-color 0.3s;
 }
 .link-padrao:hover {
     color: var(--cor-texto-principal);
     border-bottom-color: var(--cor-texto-principal);
 }
 
+
 /* -------------------------------------- */
-/* NOVO: ESTILO DAS ONDAS SVG (Onda na cor de destaque) */
+/* ESTILO LIGHT MODE (APLICADO VIA CLASSE BODY.light-mode) */
 /* -------------------------------------- */
-.hero {
-    position: relative; 
-    overflow: hidden; 
-    padding-bottom: 120px; 
+body.light-mode {
+    background-color: var(--cor-fundo-light);
+    color: var(--cor-texto-principal-light);
 }
+
+body.light-mode .secao, 
+body.light-mode footer,
+body.light-mode .hero {
+    background-color: var(--cor-fundo-light);
+    border-bottom: 1px solid var(--cor-linha-light);
+}
+
+/* Títulos e Textos no Light Mode */
+body.light-mode h1,
+body.light-mode h3, 
+body.light-mode .lista-projetos h4 {
+    color: var(--cor-destaque); /* Títulos na cor de destaque no Light Mode */
+}
+
+body.light-mode .hero p,
+body.light-mode .detalhes {
+    color: var(--cor-secundaria-light);
+}
+
+/* LINKS PADRÃO (LIGHT MODE) */
+body.light-mode .link-padrao:hover {
+    color: var(--cor-texto-principal-light);
+    border-bottom-color: var(--cor-texto-principal-light);
+}
+
+/* -------------------------------------- */
+/* ESTILO DAS ONDAS SVG */
+/* -------------------------------------- */
 
 .wave-container {
     position: absolute;
@@ -78,41 +128,23 @@ body {
     height: 120px; 
 }
 
-/* Cores da onda para cada tema */
+/* Cor da onda (deve ser a mesma cor de fundo da seção que a precede/sucede) */
 .wave path {
-    /* CORREÇÃO AQUI: A ONDA DEVE TER A COR DA PRÓXIMA SEÇÃO (Dark Mode, é a cor de fundo) */
-    fill: var(--cor-fundo); 
+    fill: var(--cor-fundo); /* A onda, no Dark Mode, tem cor de fundo escuro */
 }
 
 body.light-mode .wave path {
-    /* No Light Mode, a onda deve ser branca */
-    fill: var(--cor-fundo-light); 
+    fill: var(--cor-fundo-light); /* A onda, no Light Mode, tem cor de fundo claro */
 }
 
-
-/* CORREÇÃO IMPORTANTE: Mudar a cor do HERO no Light Mode para a cor de DESTAQUE (Verde/Água) */
-body.light-mode .hero {
-    background-color: var(--cor-destaque);
-}
-
-body.light-mode .hero .wave path {
-    /* A onda deve ter a cor do Light Mode (branco) */
-    fill: var(--cor-fundo-light);
-}
-
-/* A COR DE PREENCHIMENTO DO SVG ESTÁ NO HTML: Preste atenção no fill="var(--cor-fundo)" */
-/* Mas vamos garantir que o Hero tenha a cor que você quer (Dark Mode) */
-.hero {
-    background-color: var(--cor-fundo);
-}
 
 /* -------------------------------------- */
-/* NOVO: ESTILO DO BOTÃO DE TEMA */
+/* ESTILO DO BOTÃO DE TEMA */
 /* -------------------------------------- */
 .theme-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: absolute; /* Usando absolute para se posicionar dentro do HERO */
+    top: 30px; 
+    right: 30px; 
     background: var(--cor-destaque);
     color: var(--cor-fundo);
     border: none;
@@ -121,7 +153,7 @@ body.light-mode .hero .wave path {
     height: 40px;
     font-size: 1.2em;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,124 +163,10 @@ body.light-mode .hero .wave path {
     filter: brightness(0.9);
 }
 
-/* -------------------------------------- */
-/* NOVO: ESTILO DAS ONDAS SVG */
-/* -------------------------------------- */
-.hero {
-    position: relative; /* Para que a onda seja posicionada em relação ao Hero */
-    overflow: hidden; /* Garante que a onda não transborde */
-    padding-bottom: 120px; /* Ajusta o padding para a onda ficar na parte de baixo */
-}
-
-.wave-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    line-height: 0; /* Remove espaço extra abaixo do SVG */
-}
-
-.wave {
-    display: block;
-    width: 100%;
-    height: 120px; /* Altura da onda */
-}
-
-/* Cores da onda para cada tema */
-.wave path {
-    fill: var(--cor-fundo); /* Cor de fundo padrão (Dark) */
-}
-
-body.light-mode .wave path {
-    fill: var(--cor-fundo-light); /* Cor de fundo Light Mode */
-}
-
-
-/* --- O RESTANTE DO CSS ABAIXO DEVE PERMANECER IGUAL, MAS GARANTO QUE ESTÁ AQUI --- */
-
-/* UTILITÁRIOS */
+/* [Restante do CSS de Layout e Responsividade] */
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
 }
-/* ... resto do CSS ... */
-
-.hero h1 {
-    font-size: 4em;
-    font-weight: 700;
-    margin-bottom: 15px;
-    line-height: 1.1;
-}
-
-.hero p {
-    font-size: 1.5em;
-    color: var(--cor-secundaria);
-    margin-bottom: 30px;
-    max-width: 600px;
-}
-
-/* SEÇÃO DE PROJETOS */
-.lista-projetos {
-    list-style: none;
-    text-align: left;
-    margin-top: 40px;
-}
-
-.lista-projetos li {
-    margin-bottom: 40px;
-}
-
-.lista-projetos h4 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.lista-projetos .detalhes {
-    font-size: 1em;
-    color: var(--cor-secundaria);
-}
-
-.lista-projetos a {
-    display: inline-block;
-    font-size: 0.9em;
-    margin-top: 5px;
-    text-decoration: none;
-}
-.lista-projetos a:not(.link-padrao) {
-    color: var(--cor-destaque);
-}
-
-/* FOOTER/CONTATO */
-footer {
-    padding: 40px 0;
-    text-align: left;
-    font-size: 1.2em;
-}
-
-footer a {
-    text-decoration: none;
-    margin-right: 15px;
-}
-
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 80px;
-        min-height: auto;
-    }
-    .hero h1 {
-        font-size: 2.5em;
-    }
-    .hero p {
-        font-size: 1.2em;
-    }
-    .lista-projetos h4 {
-        font-size: 1.5em;
-    }
-    h3 {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-}
+/* ... resto dos estilos (hero h1, p, lista-projetos, media queries) ... */
