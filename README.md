@@ -1,6 +1,6 @@
 # 💫 Olá! Eu sou a Isabeli Carolina 👋  
 
-🎯 **Analista de Dados e Business Intelligence em formação**  
+🎯 **Analista de Dados e Business Intelligence**  
 💻 Apaixonada por transformar números em histórias e dados em decisões inteligentes  
 
 ---
