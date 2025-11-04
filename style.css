@@ -132,44 +132,61 @@ a:focus, button:focus, .card-projeto:focus{
 /* ======= LINHA DO TEMPO ======= */
 .timeline {
   position: relative;
-  margin: 2rem 0;
+  margin: 2.25rem 0;
   padding-left: 2rem;
-  border-left: 3px solid var(--accent-color, #0078d7);
+  border-left: 3px solid var(--accent); /* usa a cor de destaque global */
 }
 
 .timeline-item {
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
   position: relative;
+  padding-left: 0.75rem; /* afasta um pouco o texto da linha */
 }
 
 .timeline-dot {
   position: absolute;
-  left: -10px;
-  top: 5px;
-  width: 16px;
-  height: 16px;
-  background-color: var(--accent-color, #0078d7);
+  left: -1.15rem; /* alinha o ponto sobre a linha */
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent); /* mesmo verde de destaque */
   border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(1,201,155,0.04); /* halo sutil para destaque */
+  border: 2px solid rgba(0,0,0,0.12); /* leve borda para profundidade no dark */
 }
 
+/* Ajuste de cor do ponto para o modo claro */
+body.light-mode .timeline-dot {
+  border: 2px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 6px rgba(1,201,155,0.06);
+}
+
+/* Conteúdo */
 .timeline-content h3 {
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-color, #222);
+  margin-bottom: 0.35rem;
+  color: var(--text); /* usa cor de texto principal (funciona em dark & light) */
+  font-size: 1.02rem;
+  opacity: 0.98;
 }
 
 .timeline-content p {
   margin: 0;
-  color: var(--muted-color, #555);
-  line-height: 1.5;
+  color: var(--muted); /* usa cor de texto secundária */
+  line-height: 1.6;
+  margin-top: 0.35rem;
+  max-width: 70ch;
+}
+
+/* Pequenas melhorias responsivas */
+@media (max-width: 992px) {
+  .timeline { padding-left: 1.25rem; border-left-width: 2px; }
+  .timeline-dot { left: -1rem; width: 10px; height: 10px; }
+  .timeline-content p { max-width: 100%; }
 }
 
 @media (max-width: 600px) {
-  .timeline {
-    padding-left: 1.5rem;
-  }
-  .timeline-dot {
-    left: -8px;
-  }
+  .timeline { padding-left: 1rem; }
+  .timeline-dot { left: -0.9rem; }
 }
 
