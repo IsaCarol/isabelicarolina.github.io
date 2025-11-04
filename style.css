@@ -128,3 +128,48 @@ a:focus, button:focus, .card-projeto:focus{
 
 /* Transições suaves */
 *{transition:all 220ms ease}
+
+/* ======= LINHA DO TEMPO ======= */
+.timeline {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 2rem;
+  border-left: 3px solid var(--accent-color, #0078d7);
+}
+
+.timeline-item {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -10px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--accent-color, #0078d7);
+  border-radius: 50%;
+}
+
+.timeline-content h3 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color, #222);
+}
+
+.timeline-content p {
+  margin: 0;
+  color: var(--muted-color, #555);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .timeline {
+    padding-left: 1.5rem;
+  }
+  .timeline-dot {
+    left: -8px;
+  }
+}
+
